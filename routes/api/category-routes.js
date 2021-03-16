@@ -6,27 +6,32 @@ const { Category, Product } = require("../../models");
 router.get("/", async (req, res) => {
     try {
         const categoryData = await Category.findAll({include: [{model: Product}]});
-        res.json(categoryData);
+        res.status(200).json(categoryData);
     } catch (err) {
-        res.json(err);
+        res.status(500).json(err);
     }
 });
 
 router.get("/:id", async (req, res) => {
     try {
         const categoryData = await Category.findByPk(req.params.id, {include: [{model: Product}]});
-        res.json(categoryData);
+        // if no data
+        if (!categoryData) {
+            res.status(404).json({ message: "No category with this id!" });
+            return;
+        }
+        res.status(200).json(categoryData);
     } catch (err) {
-        res.json(err);
+        res.status(500).json(err);
     }
 });
 
 router.post("/", async (req, res) => {
     try {
         const newCategory = await Category.create(req.body);
-        res.json(newCategory);
+        res.status(200).json(newCategory);
     } catch (err) {
-        res.json(err);
+        res.status(500).json(err);
     }
 });
 
@@ -37,7 +42,7 @@ router.put("/:id", async (req, res) => {
                 id: req.params.id,
             },
         });
-        // if not rows affected
+        // if no rows affected
         if (!categoryData[0]) {
             res.status(404).json({ message: "No category with this id!" });
             return;
@@ -55,6 +60,7 @@ router.delete("/:id", async (req, res) => {
                 id: req.params.id,
             },
         });
+        // if no rows affected
         if (!categoryData) {
             res.status(404).json({ message: "No category with this id!" });
             return;

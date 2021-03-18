@@ -1,2 +1,3 @@
 # tee-sherts
-E-Commerce Back End project
+
+Template E-Commerce Back End

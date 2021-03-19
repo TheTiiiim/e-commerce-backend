@@ -18,11 +18,14 @@ Template E-Commerce Back End
 
 ## Installation
 
-clone the repository, create the database using ./db/schema.sql, and run `npm run seed` in the terminal
+1. clone the repository
+2. create the database using ./db/schema.sql
+3. run `npm install`
+4. run `npm run seed`
 
 ## Usage
 
-run `npm start` in the terminal and make requests to http://localhost:3001/
+run `npm start` and make requests to http://localhost:3001/
 
 ## License
 
